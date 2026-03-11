@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Control</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Elementos de Audio -->
+    <audio id="audio-success" src="success-1-6297.mp3" preload="auto"></audio>
+    <audio id="audio-error" src="error-96492.mp3" preload="auto"></audio>
+    <audio id="audio-click" src="click-409642.mp3" preload="auto"></audio>
+    <audio id="audio-toggle" src="https://www.zapsplat.com/wp-content/uploads/2015/sound-design/ui_switch_toggle_01.mp3" preload="auto"></audio>
+    <!-- Pantalla de Login / Registro -->
+    <div class="login-container" id="loginScreen">
+        <div class="login-box">
+            <!-- Formulario de Login -->
+            <div id="login-form">
+                <div class="logo-container"><img src="prueba1.png" alt="Logo"></div>
+                <div class="input-group">
+                    <label for="username"><i class="fas fa-user"></i> Usuario</label>
+                    <input type="text" id="username" placeholder="Ingrese su usuario" pattern="^(?!doa$|world$).*$" title="No se permite 'Doa' ni 'world' como usuario">
+                </div>
+                <div class="input-group">
+                    <label for="password"><i class="fas fa-lock"></i> Contraseña</label>
+                    <input type="password" id="password" placeholder="Ingrese su contraseña">
+                </div>
+                <button class="login-btn" id="loginButton">ENTRAR</button>
+                <p class="form-switcher">¿No tienes cuenta? <a href="#" id="showRegister">Regístrate</a></p>
+            </div>
+            <!-- Formulario de Registro -->
+            <div id="register-form" style="display: none;">
+                <div class="logo-container"><h2>Crear Cuenta</h2></div>
+                <div class="input-group">
+                    <label for="reg-username"><i class="fas fa-user-plus"></i> Nuevo Usuario</label>
+                    <input type="text" id="reg-username" placeholder="Elige un nombre de usuario" pattern="^(?!doa$|world$).*$" title="No se permite 'Doa' ni 'world' como usuario">
+                </div>
+                <div class="input-group">
+                    <label for="reg-password"><i class="fas fa-key"></i> Nueva Contraseña</label>
+                    <input type="password" id="reg-password" placeholder="Crea una contraseña segura">
+                </div>
+                <button class="login-btn" id="registerButton">REGISTRARSE</button>
+                <p class="form-switcher">¿Ya tienes cuenta? <a href="#" id="showLogin">Inicia Sesión</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Panel de Control (Dashboard) -->
+    <div class="dashboard" id="dashboard">
+        <div class="dashboard-container">
+            <!-- Barra Lateral (Sidebar) -->
+            <aside class="sidebar">
+                <div class="sidebar-header"><img src="imagen1.png" alt="Logo"></div>
+                <nav class="sidebar-icons">
+                    <div class="sidebar-icon active" data-section="aimbot"><i class="fa-solid fa-crosshairs"></i><span class="tooltip">Aimbot</span></div>
+                    <div class="sidebar-icon" data-section="esp"><i class="fa-solid fa-eye"></i><span class="tooltip">ESP</span></div>
+                    <div class="sidebar-icon" data-section="misc"><i class="fa-solid fa-star"></i><span class="tooltip">Misc</span></div>
+                    <div class="sidebar-icon" data-section="sensitivity"><i class="fa-solid fa-hand-pointer"></i><span class="tooltip">Sensibilidad</span></div>
+                    <div class="sidebar-icon" data-section="optimization"><i class="fa-solid fa-bolt"></i><span class="tooltip">Optimización</span></div>
+                    <div class="sidebar-icon" data-section="calibration"><i class="fa-solid fa-gun"></i><span class="tooltip">Calibración</span></div>
+                    <div class="sidebar-icon" data-section="scriptables"><i class="fa-solid fa-file-code"></i><span class="tooltip">Scripts</span></div>
+                    <div class="sidebar-icon" data-section="dns"><i class="fa-solid fa-server"></i><span class="tooltip">DNS</span></div>
+                    <div class="sidebar-icon" data-section="config"><i class="fa-solid fa-gear"></i><span class="tooltip">Config</span></div>
+                </nav>
+            </aside>
+
+            <!-- Contenido Principal -->
+            <main class="menu-content">
+                <!-- Sección Aimbot -->
+                <section class="menu-section active" id="aimbot">
+                    <h1><i class="fas fa-crosshairs"></i> Aimbot</h1>
+                    <div class="card-grid">
+                        <div class="feature-card">
+                            <h2 class="feature-title"><i class="fas fa-bullseye"></i>Aimbot General</h2>
+                            <div class="feature-row"><span>Aimbot</span><label class="toggle-switch"><input type="checkbox" data-feature="Aimbot"><span class="slider"></span></label></div>
+                            <div class="feature-row"><span>Aim Bone</span><label class="toggle-switch"><input type="checkbox" id="aimbone-switch" data-feature="Aim Bone"><span class="slider"></span></label></div>
+                            <div class="sub-options" id="aimbone-options">
+                                <div class="radio-group">
+                                    <label class="radio-label"><input type="radio" name="bone-selection" value="head" checked><span>Head</span></label>
+                                    <label class="radio-label"><input type="radio" name="bone-selection" value="neck"><span>Neck</span></label>
+                                    <label class="radio-label"><input type="radio" name="bone-selection" value="pecho"><span>Pecho</span></label>
+                                </div>
+                            </div>
+                            <div class="feature-row"><span>Silent Aim</span><label class="toggle-switch"><input type="checkbox" data-feature="Silent Aim"><span class="slider"></span></label></div>
+                            <div class="feature-row"><span>Aim Prediction</span><label class="toggle-switch"><input type="checkbox" data-feature="Aim Prediction"><span class="slider"></span></label></div>
+                        </div>
+                        <div class="feature-card">
+                            <h2 class="feature-title"><i class="fas fa-arrows-alt"></i>Control de Aimbot</h2>
+                             <div class="feature-row"><span>Activar FOV</span><label class="toggle-switch"><input type="checkbox" data-feature="FOV Circle"><span class="slider"></span></label></div>
+                            <div class="slider-container"><span>FOV</span><input type="range" min="1" max="360" value="90" class="range-input"><div class="range-value"><span>90</span>°</div></div>
+                            <div class="feature-row"><span>Recoil Control System</span><label class="toggle-switch"><input type="checkbox" id="rcs-switch" data-feature="RCS"><span class="slider"></span></label></div>
+                            <div class="sub-options" id="rcs-options">
+                                <div class="slider-container"><span>RCS Fuerza</span><input type="range" min="1" max="100" value="50" class="range-input"><div class="range-value"><span>50</span>%</div></div>
+                            </div>
+                        </div>
+                        <div class="feature-card">
+                            <h2 class="feature-title"><i class="fas fa-shield-alt"></i>Aim Legit</h2>
+                            <div class="feature-row"><span>Aim Legit</span><label class="toggle-switch"><input type="checkbox" id="aim-legit-switch" data-feature="Aim Legit"><span class="slider"></span></label></div>
+                            <div class="sub-options" id="advanced-legit-options">
+                                <div class="slider-container"><span>Smoothness</span><input type="range" min="1" max="100" value="50" class="range-input"><div class="range-value"><span>50</span>%</div></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <h2 class="feature-title"><i class="fas fa-bullseye"></i> Opciones Adicionales</h2>
+                        <div class="feature-row">
+                            <span>Aimlock Alok</span>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="aimlock-alok" data-feature="Aimlock Alok">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <div class="feature-row">
+                            <span>Aimhead Fix</span>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="aimhead-fix" data-feature="Aimhead Fix">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <div class="feature-row">
+                            <span>Aimbot Login</span>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="aimbot-login" data-feature="Aimbot Login">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <div class="feature-row">
+                            <span>Aimbot Scope</span>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="aimbot-scope" data-feature="Aimbot Scope">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Sección ESP -->
+                <section class="menu-section" id="esp">
+                    <h1><i class="fas fa-eye"></i> Visuals (ESP)</h1>
+                    <div class="feature-card">
+                        <h2 class="feature-title"><i class="fas fa-radar"></i>Opciones ESP</h2>
+                        <div class="feature-row"><span>Health ESP</span><label class="toggle-switch"><input type="checkbox" id="health-esp" data-feature="Health ESP"><span class="slider"></span></label></div>
+                        <div class="feature-row"><span>3D Box</span><label class="toggle-switch"><input type="checkbox" id="box-esp" data-feature="3D Box"><span class="slider"></span></label></div>
+                        <div class="feature-row"><span>Weapon ESP</span><label class="toggle-switch"><input type="checkbox" id="weapon-esp" data-feature="Weapon ESP"><span class="slider"></span></label></div>
+                        <div class="feature-row"><span>Distance ESP</span><label class="toggle-switch"><input type="checkbox" id="distance-esp" data-feature="Distance ESP"><span class="slider"></span></label></div>
+                        <div class="character-preview">
+                            <img src="SKIN.png" alt="Character Model">
+                            <div class="esp-overlays">
+                                <div class="health-bar" style="display: none;"><div class="health-fill"></div></div>
+                                <div class="box-esp" style="display: none;"></div>
+                                <div class="weapon-info" style="display: none;">AK-47</div>
+                                <div class="distance-info" style="display: none;">100m</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Sección Misc -->
+                <section class="menu-section" id="misc">
+                    <h1><i class="fas fa-star"></i> Misc</h1>
+                    <div class="card-grid">
+                        <div class="feature-card">
+                            <h2 class="feature-title"><i class="fas fa-rocket"></i>Speedy</h2>
+                            <div class="feature-row"><span>Activar Speedy</span><label class="toggle-switch"><input type="checkbox" data-feature="Speedy"><span class="slider"></span></label></div>
+                            <div class="slider-container"><span>Velocidad</span><input type="range" min="1" max="5" value="1" step="0.1" class="range-input"><div class="range-value">x<span>1.0</span></div></div>
+                            <div class="slider-container"><span>speedy fix</span><input type="range" min="1" max="3" value="1" step="0.1" class="range-input"><div class="range-value">x<span>1.0</span></div></div>
+                            <div class="slider-container"><span>speedy x2</span><input type="range" min="1" max="4" value="1" step="0.1" class="range-input"><div class="range-value">x<span>1.0</span></div></div>
+                        </div>
+                        <div class="feature-card">
+                            <h2 class="feature-title"><i class="fas fa-gamepad"></i>Otras Funciones</h2>
+                            <div class="feature-row"><span>No Recoil</span><label class="toggle-switch"><input type="checkbox" data-feature="No Recoil"><span class="slider"></span></label></div>
+                            <div class="feature-row"><span>No Spread</span><label class="toggle-switch"><input type="checkbox" data-feature="No Spread"><span class="slider"></span></label></div>
+                            <div class="feature-row"><span>Fake Lag</span><label class="toggle-switch"><input type="checkbox" id="fakelag-switch" data-feature="Fake Lag"><span class="slider"></span></label></div>
+                            <div class="sub-options" id="fakelag-options">
+                                <div class="slider-container"><span>Ping (ms)</span><input type="range" min="0" max="500" value="50" class="range-input" id="fakelag-slider"><div class="range-value"><span>50</span>ms</div></div>
+                                <div class="warning-box" id="fakelag-warning"></div>
+                            </div>
+                        </div>
+                         <div class="feature-card">
+                             <h2 class="feature-title"><i class="fas fa-gamepad"></i>Acciones</h2>
+                             <a href="freefireth://" class="action-btn special-btn"><i class="fas fa-play"></i> Abrir Free Fire</a>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Sección Sensibilidad -->
+                <section class="menu-section" id="sensitivity">
+                    <h1><i class="fas fa-hand-pointer"></i> Sensibilidad</h1>
+                    <div class="feature-card">
+                        <h2 class="feature-title"><i class="fas fa-sliders-h"></i>Ajustes de Sensibilidad Global</h2>
+                        <div class="slider-container"><span>General</span><input type="range" min="0" max="200" value="100" class="range-input" id="sens-general"><div class="range-value"><span>100</span>%</div></div>
+                        <div class="slider-container"><span>Mira de Punto Rojo</span><input type="range" min="0" max="200" value="100" class="range-input" id="sens-reddot"><div class="range-value"><span>100</span>%</div></div>
+                        <div class="slider-container"><span>Mira 2x</span><input type="range" min="0" max="200" value="100" class="range-input" id="sens-2x"><div class="range-value"><span>100</span>%</div></div>
+                        <div class="slider-container"><span>Mira 4x</span><input type="range" min="0" max="200" value="100" class="range-input" id="sens-4x"><div class="range-value"><span>100</span>%</div></div>
+                        <div class="slider-container"><span>Mira AWM</span><input type="range" min="0" max="200" value="50" class="range-input" id="sens-awm"><div class="range-value"><span>50</span>%</div></div>
+                        <button class="action-btn" id="generateSensButton"><i class="fas fa-dice"></i> Generar Sensibilidad para tu telefono</button>
+                        <div class="feature-card">
+                            <h2 class="feature-title"><i class="fas fa-mouse"></i> Control de DPI (DPI++)</h2>
+                            <div class="feature-row">
+                                <span>Activar Modificador de DPI</span>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="dpi-modifier-toggle" data-feature="DPI-Modifier">
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            <div class="sub-options active" id="dpi-options">
+                                <div class="slider-container">
+                                    <span>DPI Base del telefono</span>
+                                    <input type="range" id="dpi-base-slider" min="400" max="3200" value="800" step="100" class="range-input">
+                                    <div class="range-value"><span>800</span></div>
+                                </div>
+                                <hr style="border-color: var(--glass-border); margin: 20px 0;">
+                                <div class="slider-container">
+                                    <span><i class="fas fa-plus-circle"></i> Aumento de DPI</span>
+                                    <input type="range" id="dpi-increase-slider" min="0" max="1000" value="200" step="50" class="range-input">
+                                    <div class="range-value"><span>+200</span></div>
+                                </div>
+                                <p class="option-description">
+                                    Tu DPI final será: <strong id="final-dpi-display" class="highlight-text">1000</strong>.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Sección Optimización -->
+                <section class="menu-section" id="optimization">
+                    <h1><i class="fas fa-bolt"></i> Optimización</h1>
+                    <div class="card-grid">
+                        <div class="feature-card">
+                            <h2 class="feature-title"><i class="fas fa-eye-slash"></i>Fps++</h2>
+                            <div class="feature-row"><span>Desactivar Partículas</span><label class="toggle-switch"><input type="checkbox" data-feature="No Particles"><span class="slider"></span></label></div>
+                            <div class="feature-row"><span>Desactivar Reflejos</span><label class="toggle-switch"><input type="checkbox" data-feature="No Reflections"><span class="slider"></span></label></div>
+                            <div class="feature-row"><span>Desactivar Sombras</span><label class="toggle-switch"><input type="checkbox" data-feature="No Shadows"><span class="slider"></span></label></div>
+                            <div class="feature-row"><span>desactivar eventos (un poco peligroso)</span><label class="toggle-switch"><input type="checkbox" data-feature="No Weather"><span class="slider"></span></label></div>
+                        </div>
+                        <div class="feature-card">
+                             <h2 class="feature-title"><i class="fas fa-gauge-high"></i>Rendimiento</h2>
+                            <div class="feature-row"><span>Modelos modo carton</span><label class="toggle-switch"><input type="checkbox" data-feature="Low Poly Models"><span class="slider"></span></label></div>
+                            <div class="feature-row"><span>Texturas Bajas</span><label class="toggle-switch"><input type="checkbox" data-feature="Low Textures"><span class="slider"></span></label></div>
+                            <div class="feature-row"><span>Activar FPS Boost</span><label class="toggle-switch"><input type="checkbox" data-feature="FPS Boost"><span class="slider"></span></label></div>
+                            <div class="slider-container"><span>FPS DESEADOS</span><input type="range" min="30" max="240" value="60" step="10" class="range-input"><div class="range-value"><span>60</span></div></div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Sección Calibración -->
+                <section class="menu-section" id="calibration">
+                    <h1><i class="fas fa-gun"></i> Calibración de Armas</h1>
+                    
+                    <!-- Sección para mostrar la configuración del arma seleccionada -->
+                    <div class="feature-card" id="weapon-config-panel" style="display: none;">
+                        <h2 class="feature-title" id="selected-weapon-title"><i class="fas fa-wrench"></i> Configuración: <span id="current-weapon-name">Arma</span></h2>
+                        <div class="slider-container">
+                            <span>RCS Vertical (Fuerza)</span>
+                            <input type="range" min="0" max="100" value="50" class="range-input" id="calib-rcs-v"><div class="range-value"><span>50</span>%</div>
+                        </div>
+                        <div class="slider-container">
+                            <span>RCS Horizontal (Ángulo)</span>
+                            <input type="range" min="-100" max="100" value="0" class="range-input" id="calib-rcs-h"><div class="range-value"><span>0</span>%</div>
+                        </div>
+                        <div class="slider-container">
+                            <span>Aimbot Smoothness</span>
+                            <input type="range" min="1" max="100" value="50" class="range-input" id="calib-smooth"><div class="range-value"><span>50</span>%</div>
+                        </div>
+                        <div class="feature-row">
+                            <span>Activar Calibración Específica</span>
+                            <label class="toggle-switch"><input type="checkbox" id="calib-enabled" checked><span class="slider"></span></label>
+                        </div>
+                        <button class="action-btn" id="saveWeaponConfigButton"><i class="fas fa-save"></i> Guardar Configuración</button>
+                    </div>
+                    <!-- Fin del panel de configuración -->
+
+                    <div class="feature-card">
+                        <h2 class="weapon-type-title"><i class="fas fa-crosshairs"></i> Subfusiles (SMG)</h2>
+                        <div class="weapon-grid">
+                            <div class="weapon-card" data-weapon="p90" data-name="P90"><img src="p90.png" alt="P90"><span>P90</span></div>
+                            <div class="weapon-card" data-weapon="mp40" data-name="MP40"><img src="mp40.png" alt="MP40"><span>MP40</span></div>
+                            <div class="weapon-card" data-weapon="ump" data-name="UMP"><img src="ump.png" alt="UMP"><span>UMP</span></div>
+                            <div class="weapon-card" data-weapon="desert" data-name="Desert Eagle"><img src="desert.png" alt="Desert Eagle"><span>Desert Eagle</span></div>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <h2 class="weapon-type-title"><i class="fas fa-burst"></i> Escopetas</h2>
+                        <div class="weapon-grid">
+                            <div class="weapon-card" data-weapon="m1887" data-name="M1887"><img src="m1887.png" alt="M1887"><span>M1887</span></div>
+                            <div class="weapon-card" data-weapon="spas12" data-name="SPAS12"><img src="spas12.png" alt="SPAS12"><span>SPAS12</span></div>
+                            <div class="weapon-card" data-weapon="m1014" data-name="M1014"><img src="m1014.png" alt="M1014"><span>M1014</span></div>
+                            <div class="weapon-card" data-weapon="mag7" data-name="MAG-7"><img src="mag7.png" alt="MAG-7"><span>MAG-7</span></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Sección Scripts -->
+                <section class="menu-section" id="scriptables">
+                    <h1><i class="fas fa-file-code"></i> Scripts</h1>
+                    <div class="download-grid">
+                        <div class="download-card"><span><i class="fas fa-code"></i> 𝐁𝐈𝐆 𝟑 ✦</span><a href="big3.js" download class="download-btn">Descargar</a></div>
+                        <div class="download-card"><span><i class="fas fa-code"></i> Script Ejemplo 2</span><a href="ejemplo2.js" download class="download-btn">Descargar</a></div>
+                        <div class="download-card"><span><i class="fas fa-code"></i> Script Ejemplo 3</span><a href="ejemplo3.js" download class="download-btn">Descargar</a></div>
+                        <div class="download-card"><span><i class="fas fa-code"></i> Script Ejemplo 4</span><a href="ejemplo4.js" download class="download-btn">Descargar</a></div>
+                        <div class="download-card"><span><i class="fas fa-code"></i> Script Ejemplo 5</span><a href="ejemplo5.js" download class="download-btn">Descargar</a></div>
+                        <div class="download-card"><span><i class="fas fa-code"></i> Script Ejemplo 6</span><a href="ejemplo6.js" download class="download-btn">Descargar</a></div>
+                    </div>
+                </section>
+
+                <!-- Sección DNS -->
+                <section class="menu-section" id="dns">
+                    <h1><i class="fas fa-server"></i> Perfiles DNS</h1>
+                    <div class="download-grid">
+                        <div class="download-card"><span><i class="fas fa-certificate"></i> deadly dns</span><a href="deadly.cer" download class="download-btn">Descargar</a></div>
+                        <div class="download-card"><span><i class="fas fa-certificate"></i> drummy</span><a href="drummy.cer" download class="download-btn">Descargar</a></div>
+                        <div class="download-card"><span><i class="fas fa-certificate"></i> Aimdns</span><a href="AimDns.cer" download class="download-btn">Descargar</a></div>
+                        <div class="download-card"><span><i class="fas fa-certificate"></i> ghost town</span><a href="ghostTown.cer" download class="download-btn">Descargar</a></div>
+                        <div class="download-card"><span><i class="fas fa-certificate"></i> Lil speedy</span><a href="Lil speedy.cer" download class="download-btn">Descargar</a></div>
+                        <div class="download-card"><span><i class="fas fa-certificate"></i> Lil brudda</span><a href="lilBrudda.cer" download class="download-btn">Descargar</a></div>
+                    </div>
+                </section>
+
+                <!-- Sección Configuración -->
+                <section class="menu-section" id="config">
+                    <h1><i class="fas fa-gear"></i> Configuración</h1>
+                    <div class="feature-card">
+                        <h2 class="feature-title"><i class="fas fa-palette"></i>Apariencia</h2>
+                        <div class="theme-selector">
+                            <div class="theme-option" onclick="changeTheme('dark')"><i class="fas fa-moon"></i> Oscuro</div>
+                            <div class="theme-option" onclick="changeTheme('red')"><i class="fas fa-fire"></i> Rojo</div>
+                            <div class="theme-option" onclick="changeTheme('blue')"><i class="fas fa-water"></i> Azul</div>
+                            <div class="theme-option" onclick="changeTheme('green')"><i class="fas fa-leaf"></i> Verde</div>
+                        </div>
+                    </div>
+                     <div class="feature-card">
+                        <h2 class="feature-title"><i class="fas fa-volume-up"></i>Sonido</h2>
+                        <div class="feature-row">
+                            <span>Habilitar Sonidos de UI</span>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="sound-toggle" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <h2 class="feature-title"><i class="fas fa-user-shield"></i>Panel de Administrador</h2>
+                        <div id="adminLogin">
+                            <p>Introduce la contraseña para acceder al panel de control.</p>
+                            <div class="admin-login-group">
+                                <input type="password" id="adminPassInput" placeholder="Contraseña de admin">
+                                <button class="action-btn" onclick="checkAdminPass()">Acceder</button>
+                            </div>
+                        </div>
+                        <div id="adminPanel" class="admin-panel">
+                            <div class="admin-stats">
+                                <div class="stat-card"><h4><i class="fas fa-users"></i> IPs Únicas</h4><p id="total-users-stat">0</p></div>
+                                <div class="stat-card"><h4><i class="fas fa-clock"></i> Último Activo</h4><p id="last-active-stat" style="font-size: 0.9rem;">N/A</p></div>
+                                <div class="stat-card"><h4><i class="fas fa-ban"></i> IPs Bloqueadas</h4><p id="blocked-users-stat">0</p></div>
+                            </div>
+                            <div class="admin-dashboard">
+                                <div class="ip-list-container">
+                                    <h4><i class="fas fa-list"></i> IPs Registradas</h4>
+                                    <div id="ipList" class="ip-list"></div>
+                                    <button class="action-btn danger" onclick="clearRecords()"><i class="fas fa-trash"></i> Limpiar Todo</button>
+                                </div>
+                                <div class="ip-details-container">
+                                    <h4><i class="fas fa-info-circle"></i> Detalles de IP</h4>
+                                    <div id="ipDetails" class="ip-details"><p class="placeholder">Selecciona una IP de la lista para ver sus detalles.</p></div>
+                                </div>
+                            </div>
+                            <!-- NUEVO: Control Global de Funciones -->
+                            <div class="feature-card" style="margin-top: 30px;">
+                                <h2 class="feature-title"><i class="fas fa-satellite-dish"></i> Control Global de Funciones</h2>
+                                <div class="feature-row">
+                                    <span>Desactivar Aimbot Globalmente</span>
+                                    <label class="toggle-switch"><input type="checkbox" id="global-aimbot" checked><span class="slider"></span></label>
+                                </div>
+                                <div class="feature-row">
+                                    <span>Desactivar ESP Globalmente</span>
+                                    <label class="toggle-switch"><input type="checkbox" id="global-esp" checked><span class="slider"></span></label>
+                                </div>
+                                <div class="feature-row">
+                                    <span>Desactivar Fake Lag Globalmente</span>
+                                    <label class="toggle-switch"><input type="checkbox" id="global-fakelag" checked><span class="slider"></span></label>
+                                </div>
+                            </div>
+                            <!-- NUEVO: Gestión de Usuarios Locales -->
+                            <div class="feature-card" style="margin-top: 30px;">
+                                <h2 class="feature-title"><i class="fas fa-users-cog"></i> Gestión de Usuarios Locales</h2>
+                                <div id="localUserList" class="ip-list">
+                                    <p class="placeholder">Cargando usuarios locales...</p>
+                                </div>
+                                <button class="action-btn" id="addNewLocalUserBtn" style="margin-top: 16px; background: var(--success-color);"><i class="fas fa-user-plus"></i> Añadir Nuevo Usuario</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+    <script type="module" src="script.js"></script>
+    <script>
+        // En el JS, agrega la validación en login y registro
+        function login() {
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+            if (username.toLowerCase() === 'doa' || username.toLowerCase() === 'world') {
+                alert('Este usuario está bloqueado. Por favor, elige otro nombre de usuario.');
+                return;
+            }
+            if (password.toLowerCase() === 'doa' || password.toLowerCase() === 'world') {
+                alert('Esta contraseña está bloqueada. Por favor, elige otra contraseña.');
+                return;
+            }
+            // ...tu lógica de login...
+        }
+
+        document.getElementById('registerButton').addEventListener('click', function(e) {
+            const regUsername = document.getElementById('reg-username').value.trim();
+            const regPassword = document.getElementById('reg-password').value.trim();
+            if (regUsername.toLowerCase() === 'doa' || regUsername.toLowerCase() === 'world') {
+                alert('Este usuario está bloqueado. Por favor, elige otro nombre de usuario.');
+                e.preventDefault();
+                return;
+            }
+            if (regPassword.toLowerCase() === 'doa' || regPassword.toLowerCase() === 'world') {
+                alert('Esta contraseña está bloqueada. Por favor, elige otra contraseña.');
+                e.preventDefault();
+                return;
+            }
+            // ...tu lógica de registro...
+        });
+    </script>
+</body>
+</html>

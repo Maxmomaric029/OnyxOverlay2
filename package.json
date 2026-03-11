@@ -1,0 +1,15 @@
+{
+  "name": "index-webapp",
+  "version": "1.0.0",
+  "description": "HTML to APK WebApp",
+  "main": "index.html",
+  "scripts": {
+    "build": "echo 'No build step required'",
+    "sync": "cap sync"
+  },
+  "dependencies": {
+    "@capacitor/android": "^6.0.0",
+    "@capacitor/cli": "^6.0.0",
+    "@capacitor/core": "^6.0.0"
+  }
+}
