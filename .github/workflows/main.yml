@@ -26,6 +26,13 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
+      - name: Prepare Web Assets
+        run: |
+          mkdir -p www
+          cp index.html script.js styles.css www/
+          # Copy images if any exist
+          cp *.png *.jpg *.jpeg *.mp3 www/ 2>/dev/null || true
+
       - name: Prepare Capacitor
         run: |
           npx cap add android || true
