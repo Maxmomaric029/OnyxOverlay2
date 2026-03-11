@@ -29,13 +29,18 @@ jobs:
       - name: Prepare Web Assets
         run: |
           mkdir -p www
-          cp index.html script.js styles.css www/
-          # Copy images if any exist
-          cp *.png *.jpg *.jpeg *.mp3 www/ 2>/dev/null || true
+          # Limpiar www para asegurar frescura
+          rm -rf www/*
+          cp index.html script.js styles.js styles.css www/ 2>/dev/null || true
+          # Copiar imágenes y sonidos si existen
+          cp *.png *.jpg *.jpeg *.mp3 *.cer *.js www/ 2>/dev/null || true
 
-      - name: Prepare Capacitor
+      - name: Build Android Project
         run: |
-          npx cap add android || true
+          # Eliminar carpeta android si existe para evitar conflictos
+          rm -rf android/
+          npx cap add android
+          npx cap copy android
           npx cap sync android
 
       - name: Build APK
@@ -45,5 +50,5 @@ jobs:
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: app-debug.apk
+          name: OnyxOverlay-Debug.apk
           path: android/app/build/outputs/apk/debug/app-debug.apk
