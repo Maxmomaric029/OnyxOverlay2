@@ -1,5 +1,8 @@
 {
-  "appId": "com.example.webapp",
-  "appName": "WebApp",
-  "webDir": "www"
+  "appId": "com.onyx.overlay",
+  "appName": "OnyxOverlay",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https"
+  }
 }
